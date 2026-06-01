@@ -6,19 +6,19 @@ class Util
     puts "=" * largura
   end
 
-  def textoCentralizado(texto, largura)
+  def texto_centralizado(texto, largura)
     puts texto.center(largura)
   end
 
-  def gerarTitulo(texto)
-    limparTela
+  def gerar_titulo(texto)
+    limpar_tela
     largura = IO.console.winsize[1]
     linha(largura)
-    textoCentralizado(texto, largura)
+    texto_centralizado(texto, largura)
     linha(largura)
   end
 
-  def limparTela
+  def limpar_tela
     system("clear") || system("cls")
   end
 
