@@ -1,4 +1,5 @@
 require_relative "../lib/pessoa"
+require_relative "../lib/endereco"
 
 class PessoaView
 
@@ -15,9 +16,9 @@ class PessoaView
 
       case escolha
         when 1
-          p "   ID    |   CPF/CNPJ    |   NOME    |   TIPO   |    CEP   |   LOGRADOURO    "
-          @data.listar.each with index do |p, index|
-            p "#{index + 1} | #{p.cpf_cnpj} | #{p.nome} | #{p.tipo} | #{p.cep} | #{p.logradouro} "
+          p "   ID    |   CPF/CNPJ    |   NOME    |   TIPO   |    CIDADE/UF   "
+          @data.listar.each_with_index do |p, index|
+            p "#{index + 1} | #{p.cpf_cnpj} | #{p.nome} | #{p.tipo} | #{p.endereco.cidade}/#{p.endereco.uf} "
           end
         when 2
           print "Informe o CPF/CNPJ: "
@@ -26,13 +27,24 @@ class PessoaView
           print "Informe o nome: "
           nome = gets.chomp
 
-          print "Informe o cep: "
+          print "Informe o CEP: "
           cep = gets.chomp
 
           print "Informe o logradouro: "
           logradouro = gets.chomp
 
-          @data.add Pessoa.new registro, nome, cep, logradouro
+          print "Informe o bairro: "
+          bairro = gets.chomp
+
+          print "Informe a cidade: "
+          cidade = gets.chomp
+
+          print "Informe a UF: "
+          uf = gets.chomp
+
+          endereco = Endereco.new cep, logradouro, bairro, cidade, uf
+
+          @data.add Pessoa.new registro, nome, endereco
         when 0
           break
         else
